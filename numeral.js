@@ -21,7 +21,7 @@
 
     var numeral,
         _,
-        VERSION = '2.0.6',
+        VERSION = '3.0.0',
         formats = {},
         locales = {},
         defaults = {
