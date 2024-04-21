@@ -29,7 +29,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@types/big.js": "^6.2.2",
     "big.js": "^6.2.1"
   },
   "devDependencies": {
@@ -52,7 +51,8 @@
     "karma-sauce-launcher": "^1.1.0",
     "load-grunt-tasks": "^3.5.2",
     "mocha": "^3.1.2",
-    "uglify-js": "latest"
+    "uglify-js": "latest",
+    "@types/big.js": "^6.2.2"
   },
   "scripts": {
     "test": "grunt"

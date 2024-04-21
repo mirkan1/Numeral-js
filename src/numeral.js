@@ -83,7 +83,7 @@
 
                 value = unformatFunction(input);
             }
-        } else if (typeof input === 'bigint') {
+        } else if (_.isBigNumber(input)) {
             value = input;
         } else if (typeof input === 'object') {
             value = input.toString();
@@ -91,9 +91,6 @@
             value = Number(input) || null;
         }
 
-        if (value && typeof value === 'object') {
-            value = value.toNumber();
-        } 
 
         return new Numeral(input, value);
     };
@@ -136,7 +133,7 @@
             // make sure we never format a null value
             value = value || 0;
             // Use conditional to handle regular numbers and BigInts separately
-            if (typeof value === 'bigint' || _.isBigNumber(value)) {
+            if (_.isBigNumber(value)) {
                 value = _.Big(value);
                 abs = _.Big(value).abs();
                 trillion = _.Big(trillion);
@@ -332,13 +329,15 @@
 
                     // check for negative number
                     value *= (string.split('-').length + Math.min(string.split('(').length - 1, string.split(')').length - 1)) % 2 ? _.Big(1) : _.Big(-1);
-
+                    
                     // remove non numbers
                     string = string.replace(/[^0-9\.]+/g, '');
-                    try {
-                        value = _.Big(string).times(value);
-                    } catch {
-                        value *= Number(string);
+                    value = _.Big(value);
+                    value = _.Big(string).times(value);
+                    if (_.isBigNumber(value)) {
+                        value = value.toString();
+                    } else {
+                        value = value.toNumber();
                     }
                 }
 
@@ -411,7 +410,7 @@
             }, 1);
         },
         isBigNumber: function (number) {
-            return Math.abs(number) > Number.MAX_SAFE_INTEGER;
+            return _.Big(number).abs() > Number.MAX_SAFE_INTEGER;
         },
         /**
          * Implementation of toFixed() that treats floats more like decimals
@@ -434,8 +433,8 @@
               boundedPrecision = minDecimals;
             }
             if (_.isBigNumber(value)) {
-                power = new _.Big(10).pow(boundedPrecision);
-                output = new _.Big(value).toFixed(boundedPrecision);
+                power = _.Big(10).pow(boundedPrecision);
+                output = _.Big(value).toFixed(boundedPrecision);
             } else {
                 power = Math.pow(10, boundedPrecision);
                 output = (roundingFunction(value + 'e+' + boundedPrecision) / power).toFixed(boundedPrecision);
