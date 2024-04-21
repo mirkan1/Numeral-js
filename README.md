@@ -55,6 +55,11 @@ See [the english unit tests](https://github.com/adamwdraper/Numeral-js/blob/mast
 
 
 # Changelog
+### 3.0.0
+
+Added: formatting of big numbers with `format('0.0a')`
+
+Added: more abbreviation declerations for big numbers
 
 ### 2.0.6
 

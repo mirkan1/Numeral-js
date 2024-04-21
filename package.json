@@ -1,6 +1,6 @@
 {
   "name": "numeral",
-  "version": "2.0.6",
+  "version": "3.0.0",
   "description": "Format and manipulate numbers.",
   "homepage": "http://numeraljs.com",
   "author": {
@@ -28,6 +28,10 @@
     "url": "https://github.com/adamwdraper/Numeral-js/issues"
   },
   "license": "MIT",
+  "dependencies": {
+    "@types/big.js": "^6.2.2",
+    "big.js": "^6.2.1"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "grunt": "latest",

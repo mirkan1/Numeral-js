@@ -23,6 +23,8 @@ describe('Numeral', function() {
                     [1234.56,'number'],
                     ['1234.56','number'],
                     [0,'number'],
+                    ['8722821678000304785','number'],
+                    [5949879911342665595n,'bigint'],
                     [NaN,'object'],
                     [null,'object']
                 ],
@@ -199,6 +201,21 @@ describe('Numeral', function() {
                 n,
                 output;
 
+            for (i = 0; i < tests.length; i++) {
+                n = numeral(tests[i][0]);
+                output = n.format(tests[i][1]);
+
+                expect(output).to.equal(tests[i][2]);
+
+                expect(typeof output).to.equal('string');
+            }
+        });
+        it('should format big numbers', function () {
+            var tests = [
+                [5949879911342665595n,'0,0','5,949,879,911,342,665,595'],
+                [8722821678000304785n,'0,0','8,722,821,678,000,304,785'],
+                [5722821678000304555n,'0,0a','5,722,822t'],
+            ]
             for (i = 0; i < tests.length; i++) {
                 n = numeral(tests[i][0]);
                 output = n.format(tests[i][1]);
