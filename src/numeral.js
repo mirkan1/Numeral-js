@@ -109,6 +109,7 @@
     // helper functions
     numeral._ = _ = {
         Big: require('big.js'),
+        // formats numbers separators, decimals places, signs, abbreviations
         numberToFormat: function(value, format, roundingFunction) {
             var locale = locales[numeral.options.currentLocale],
                 negP = false,
