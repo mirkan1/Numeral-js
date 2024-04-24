@@ -21,7 +21,7 @@
 
     var numeral,
         _,
-        VERSION = '2.0.6',
+        VERSION = '3.0.0',
         formats = {},
         locales = {},
         defaults = {
@@ -650,13 +650,23 @@
             return output;
         },
         value: function() {
-            return this._value;
+            if (!this._value) {
+                return this._value;
+            }
+            if (_.isBigNumber(this._value)) {
+                return _.Big(this._value).valueOf();
+            }
+            return _.Big(this._value).toNumber();
         },
         input: function() {
             return this._input;
         },
         set: function(value) {
-            this._value = Number(value);
+            if (_.isBigNumber(value)) {
+                this._value = _.Big(value);
+            } else {
+                this._value = Number(value);
+            }
 
             return this;
         },
